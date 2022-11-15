@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Lint php
-        uses: 10up/wpcs-action@stable
+        uses: 10up/wpcs-action@develop
         with:
           standard: Wordpress-Core
           use_local_config: "true"
