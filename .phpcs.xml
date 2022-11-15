@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Example Project" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
+
+ <description>A custom set of rules to check for a WPized WordPress project</description>
+
+ <!-- scan the current directory -->
+ <file>.</file>
+
+ <arg name="extensions" value="php" />
+ <arg name="report" value="json"/>
+ <arg name="colors"/>
+
+ <rule ref="WordPress-Extra">
+  <exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
+  <exclude name="WordPress.Sniffs.NamingConventions.PrefixAllGlobalsSniff"/>
+  <exclude name="WordPress.Sniffs.WP.I18nSniff"/>
+ </rule>
+
+ <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+ <rule ref="Generic.Commenting.Todo"/>
+
+ <config name="minimum_supported_wp_version" value="5.0"/>
+
+</ruleset>
