@@ -1,8 +1,11 @@
-div.is-style-half figure, figure.is-style-half, #editor figure.is-style-half {
-    width: 50%;
-    max-width: 555px;
-}
 figure.is-style-half {
     margin-right: auto;
     margin-left: auto;
+}
+
+div.is-style-half figure,
+figure.is-style-half,
+#editor figure.is-style-half {
+    width: 50%;
+    max-width: 555px;
 }

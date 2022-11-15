@@ -14,13 +14,21 @@
         "prettier": "npm:wp-prettier@^2.6.2"
     },
     "prettier": "@wordpress/prettier-config",
+    "stylelint": {
+        "extends": "@wordpress/stylelint-config",
+        "rules": {
+            "indentation": 4,
+            "number-leading-zero": null
+        }
+    },
     "scripts": {
         "start": "wp-scripts start --webpack-copy-php",
         "build:blocks": "wp-scripts build --webpack-copy-php --webpack-src-dir=blocks-src --output-path=blocks",
         "build:public": "wp-scripts build --webpack-copy-php --webpack-src-dir=public-src --output-path=public",
         "build": "npm run build:blocks && npm run build:public",
-        "lint:js": "wp-scripts lint-js",
-        "lint:style": "wp-scripts lint-style",
+        "lint:css": "wp-scripts lint-style",
+        "lint:js": "wp-scripts lint-js --no-error-on-unmatched-pattern ./*src/**/*.js",
+        "lint:md:docs": "wp-scripts lint-md-docs",
         "format:js": "wp-scripts format",
         "lint:js:fix": "npm run lint:js -- --fix",
         "lint:pkg-json": "wp-scripts lint-pkg-json",

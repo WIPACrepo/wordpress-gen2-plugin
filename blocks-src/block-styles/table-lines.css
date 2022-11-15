@@ -1,4 +1,5 @@
-.is-style-lines th, .is-style-lines td {
-    border: 1px solid black;
+.is-style-lines th,
+.is-style-lines td {
+    border: 1px solid #000;
     padding: .1em .2em;
 }

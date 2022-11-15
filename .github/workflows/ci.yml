@@ -10,13 +10,13 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 16
           cache: 'npm'
       - run: npm ci
-      - name: Lint js
+      - name: Lint npm
         run: |
           npm run lint:js
-          npm run lint:style
+          npm run lint:css
       - name: Lint php
         uses: 10up/wpcs-action@stable
       - name: Build/test
