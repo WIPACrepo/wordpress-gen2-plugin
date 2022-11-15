@@ -90,6 +90,7 @@ jobs:
           VERSION=$(python /tmp/bump_version.py)
           git add package.json wordpress-gen2-plugin.php
           git commit -m "<bot> update version"
+          git push
           SHA=$(git rev-parse HEAD)
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "sha=$SHA" >> $GITHUB_OUTPUT
@@ -111,6 +112,7 @@ jobs:
 
       - name: Create artifact
         run: |
+          npm run build
           npm run plugin-zip
 
       - name: Create release for tag
