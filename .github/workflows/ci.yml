@@ -57,16 +57,20 @@ jobs:
             exit 1
           fi
           cat <<EOF >/tmp/bump_version.py
-          import json
+          import json, logging
+          logging.basicConfig(level=logging.DEBUG)
           data = json.load(open('package.json'))
           old_version = data['version'].split()
+          logging.info('old version: %r', old_version)
           commit_msg = """${MSG}"""
+          logging.info('last commmit message: %s', commit_msg)
           if commit_msg.startswith('[major]'):
             version = (old_version[0]+1, 0, 0)
           elif commit_msg.startswith('[minor]'):
             version = (old_version[0], old_version[1]+1, 0)
           else:
             version = (old_version[0], old_version[1], old_version[2]+1)
+          logging.info('new version: %r', version)
           version_str = '.'.join(version)
           data['version'] = version_str
           json.dump(data, open('package.json','w'), indent=4)
