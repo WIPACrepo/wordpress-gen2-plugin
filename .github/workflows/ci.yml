@@ -19,6 +19,8 @@ jobs:
           npm run lint:css
       - name: Lint php
         uses: 10up/wpcs-action@stable
+        with:
+          standard: Wordpress-Core
       - name: Build/test
         run: |
           npm run build
