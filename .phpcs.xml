@@ -7,9 +7,8 @@
  <file>.</file>
 
  <arg name="extensions" value="php" />
- <arg name="report" value="summary"/>
+ <arg name="report" value="json"/>
  <arg name="colors"/>
- <arg value="sp"/>
 
  <rule ref="WordPress-Extra">
   <exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
@@ -19,5 +18,10 @@
  <rule ref="Generic.Commenting.Todo"/>
 
  <config name="minimum_supported_wp_version" value="5.0"/>
+
+ <config name="testVersion" value="7.0-"/>
+ <rule ref="PHPCompatibilityWP">
+  <include-pattern>*\.php$</include-pattern>
+ </rule>
 
 </ruleset>
