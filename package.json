@@ -1,6 +1,6 @@
 {
     "name": "@WIPACrepo/wordpress-gen2-plugin",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "private": true,
     "description": "IceCube-Gen2 website WordPress customizations",
     "license": "MIT",
