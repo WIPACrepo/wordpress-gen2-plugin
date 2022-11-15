@@ -1,6 +1,10 @@
 name: ci
 on:
-  push
+  push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '**'
 
 jobs:
   build:
@@ -60,7 +64,7 @@ jobs:
           import json, logging
           logging.basicConfig(level=logging.DEBUG)
           data = json.load(open('package.json'))
-          old_version = data['version'].split()
+          old_version = [int(v) for v in data['version'].split('.')]
           logging.info('old version: %r', old_version)
           commit_msg = """${MSG}"""
           logging.info('last commmit message: %s', commit_msg)
@@ -71,7 +75,7 @@ jobs:
           else:
             version = (old_version[0], old_version[1], old_version[2]+1)
           logging.info('new version: %r', version)
-          version_str = '.'.join(version)
+          version_str = '.'.join(str(v) for v in version)
           data['version'] = version_str
           json.dump(data, open('package.json','w'), indent=4)
           php_data = []
@@ -95,4 +99,23 @@ jobs:
         with:
           tag: ${{ steps.version.outputs.version }}
           commit_sha: ${{ steps.version.outputs.sha }}
-          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          # uncomment if running actions on tags
+          #github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+
+      - run: npm ci
+
+      - name: Create artifact
+        run: |
+          npm run plugin-zip
+
+      - name: Create release for tag
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          files: |
+            @${{ github.repository }}.zip
