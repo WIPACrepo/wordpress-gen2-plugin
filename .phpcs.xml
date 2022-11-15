@@ -12,6 +12,8 @@
 
  <rule ref="WordPress-Extra">
   <exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
+  <exclude name="WordPress.Sniffs.NamingConventions.PrefixAllGlobalsSniff"/>
+  <exclude name="WordPress.Sniffs.WP.I18nSniff"/>
  </rule>
 
  <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
