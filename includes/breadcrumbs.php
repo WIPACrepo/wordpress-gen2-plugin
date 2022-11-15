@@ -2,7 +2,7 @@
 
 function my_bcn_template_tag( $replacements, $type, $id ) {
     $breadcrumb = the_field( 'breadcrumb' );
-    if ( $breadcrumb == '' ) {
+    if ( '' == $breadcrumb ) {
         $breadcrumb = isset( $post->post_title ) ? $post->post_title : '';
     }
 
