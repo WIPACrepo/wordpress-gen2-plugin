@@ -84,7 +84,9 @@ jobs:
               if 'Version:' in line:
                 line = ' * Version: '+version_str
               php_data.append(line.rstrip())
-          open('wordpress-gen2-plugin.php','w').write('\n'.join(php_data))
+          with open('wordpress-gen2-plugin.php','w') as f:
+            for line in php_data:
+              print(line, file=f)
           print(version_str)
           EOF
           VERSION=$(python /tmp/bump_version.py)
