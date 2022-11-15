@@ -21,6 +21,7 @@ jobs:
         uses: 10up/wpcs-action@stable
         with:
           standard: Wordpress-Core
+          use_local_config: "true"
       - name: Build/test
         run: |
           npm run build
