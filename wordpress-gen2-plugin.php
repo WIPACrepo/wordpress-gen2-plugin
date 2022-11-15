@@ -3,7 +3,7 @@
  * Plugin Name: Wordpress Gen2 Plugin
  * Plugin URI: https://github.com/WIPACrepo/wordpress-gen2-plugin
  * Description: This is a plugin for the IceCube-Gen2 website customizations.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: WIPAC
  */
 
