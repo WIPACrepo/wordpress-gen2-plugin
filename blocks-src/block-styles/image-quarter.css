@@ -1,0 +1,8 @@
+div.is-style-quarter figure, figure.is-style-quarter, #editor figure.is-style-quarter {
+    width: 25%;
+    max-width: 277px;
+}
+figure.is-style-quarter {
+    margin-right: auto;
+    margin-left: auto;
+}

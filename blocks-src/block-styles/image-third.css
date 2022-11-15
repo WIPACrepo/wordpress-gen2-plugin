@@ -1,0 +1,8 @@
+div.is-style-third figure, figure.is-style-third, #editor figure.is-style-third {
+    width: 33%;
+    max-width: 370px;
+}
+figure.is-style-third {
+    margin-right: auto;
+    margin-left: auto;
+}
