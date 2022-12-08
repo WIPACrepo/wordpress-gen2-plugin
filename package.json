@@ -18,16 +18,15 @@
         "extends": "@wordpress/stylelint-config",
         "rules": {
             "indentation": 4,
-            "number-leading-zero": null
+            "number-leading-zero": null,
+            "selector-class-pattern": null
         }
     },
     "scripts": {
         "start": "wp-scripts start --webpack-copy-php",
-        "build:blocks": "wp-scripts build --webpack-copy-php --webpack-src-dir=blocks-src --output-path=blocks",
-        "build:public": "wp-scripts build --webpack-copy-php --webpack-src-dir=public-src --output-path=public",
-        "build": "npm run build:blocks && npm run build:public",
-        "lint:css": "wp-scripts lint-style",
-        "lint:js": "wp-scripts lint-js --no-error-on-unmatched-pattern ./*src/**/*.js",
+        "build": "wp-scripts build --webpack-copy-php --webpack-src-dir=blocks-jsx-src --output-path=blocks-jsx",
+        "lint:css": "wp-scripts lint-style ./blocks-jsx-src/**/*.*css ./blocks/**/*.css ./public/css/*.css",
+        "lint:js": "wp-scripts lint-js --no-error-on-unmatched-pattern ./blocks-jsx-src/**/*.js ./public/js/*.js",
         "lint:md:docs": "wp-scripts lint-md-docs",
         "format:js": "wp-scripts format",
         "lint:js:fix": "npm run lint:js -- --fix",
@@ -41,7 +40,9 @@
     },
     "files": [
         "blocks",
+        "blocks-jsx",
         "includes",
+        "public",
         "wordpress-gen2-plugin.php"
     ]
 }
