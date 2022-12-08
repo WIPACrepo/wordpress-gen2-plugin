@@ -9,7 +9,8 @@ if ( function_exists( 'register_block_style' ) ) {
          */
         $dirpath = plugin_dir_url( __FILE__ );
         $uri = $dirpath . 'image-half.css';
-        wp_register_style(
+        //wp_register_style
+        wp_enqueue_style(
             'block-styles-image-half-stylesheet',
             $uri,
             array(),
