@@ -61,7 +61,7 @@ function get_block_gen2_banner_post_image( $post_ID ) {
 
     if ( array_key_exists( $post_ID, $nav_items ) ) {
         $parent_id = $nav_items[ $post_ID ]->menu_item_parent;
-        if ( 0 == $parent_id) {
+        if ( 0 == $parent_id ) {
             $parent_id = $post_ID;
         } elseif ( 0 != $nav_items[ $parent_id ]->menu_item_parent ) {
             $parent_id = $nav_items[ $parent_id ]->menu_item_parent;
