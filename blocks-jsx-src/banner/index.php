@@ -17,16 +17,10 @@ function render_block_gen2_banner( $attributes, $content, $block ) {
         return '';
     }
     $post_ID = $block->context['postId'];
-    echo "<!-- gen2 banner ";
-    print_r($post_ID);
-    echo " -->";
-
-    $post_title     = trim( strip_tags( get_the_title( $post_ID ) ) );
-    $attr           = get_block_gen2_banner_border_attributes( $attributes );
-
 
     $banner_image = get_block_gen2_banner_post_image( $post_ID );
     if ( ! $banner_image ) {
+        $attr = get_block_gen2_banner_border_attributes( $attributes );
         $banner_image = get_the_post_thumbnail( $post_ID, 'full', $attr );
     }
     if ( ! $banner_image ) {
@@ -64,9 +58,6 @@ function get_block_gen2_banner_post_image( $post_ID ) {
     foreach( $nav_items_raw as $item ) {
         $nav_items[$item->object_id] = $item;
     }
-    echo "<!-- nav items ";
-    print_r( $nav_items );
-    echo " -->";
 
     if ( array_key_exists( $post_ID, $nav_items ) ) {
         $parent_ID = $nav_items[$post_ID]->menu_item_parent;
@@ -77,7 +68,6 @@ function get_block_gen2_banner_post_image( $post_ID ) {
         }
 
         $parent_title = $nav_items[$parent_ID]->title;
-        echo "<!-- parent_title: {$parent_title} -->";
         if ( array_key_exists( $parent_title, $page_categories ) ) {
             $image = $page_categories[$parent_title];
             $attrs['class'] .= ' ' . sanitize_key( $parent_title );
