@@ -11,8 +11,8 @@ function add_post_featured_image_as_rss_item_enclosure() {
 
     printf(
         '<enclosure url="%s" type="%s" />',
-        esc_url($thumbnail_src),
-        esc_attr(get_post_mime_type( $thumbnail_id ))
+        esc_url( $thumbnail_src ),
+        esc_attr( get_post_mime_type( $thumbnail_id ) )
     );
 }
 add_action( 'rss2_item', 'add_post_featured_image_as_rss_item_enclosure' );
