@@ -17,45 +17,25 @@ function render_block_gen2_banner( $attributes, $content, $block ) {
         return '';
     }
     $post_ID = $block->context['postId'];
+    echo "<!-- gen2 banner ";
+    print_r($post_ID);
+    echo " -->";
 
-    $is_link        = isset( $attributes['isLink'] ) && $attributes['isLink'];
-    $size_slug      = isset( $attributes['sizeSlug'] ) ? $attributes['sizeSlug'] : 'post-thumbnail';
     $post_title     = trim( strip_tags( get_the_title( $post_ID ) ) );
     $attr           = get_block_gen2_banner_border_attributes( $attributes );
 
-    if ( $is_link ) {
-        $attr['alt'] = $post_title;
-    }
 
-    if ( ! empty( $attributes['height'] ) ) {
-        $extra_styles = "height:{$attributes['height']};";
-        if ( ! empty( $attributes['scale'] ) ) {
-            $extra_styles .= "object-fit:{$attributes['scale']};";
-        }
-        $attr['style'] = empty( $attr['style'] ) ? $extra_styles : $attr['style'] . $extra_styles;
+    $banner_image = get_block_gen2_banner_post_image( $post_ID );
+    if ( ! $banner_image ) {
+        $banner_image = get_the_post_thumbnail( $post_ID, 'full', $attr );
     }
-
-    $featured_image = get_the_post_thumbnail( $post_ID, $size_slug, $attr );
-    if ( ! $featured_image ) {
+    if ( ! $banner_image ) {
         return '';
-    }
-    if ( $is_link ) {
-        $link_target    = $attributes['linkTarget'];
-        $rel            = ! empty( $attributes['rel'] ) ? 'rel="' . esc_attr( $attributes['rel'] ) . '"' : '';
-        $featured_image = sprintf(
-            '<a href="%1$s" target="%2$s" %3$s>%4$s</a>',
-            get_the_permalink( $post_ID ),
-            esc_attr( $link_target ),
-            $rel,
-            $featured_image
-        );
-    }
+    }    
 
-    $wrapper_attributes = empty( $attributes['width'] )
-        ? get_block_wrapper_attributes()
-        : get_block_wrapper_attributes( array( 'style' => "width:{$attributes['width']};" ) );
+    $wrapper_attributes = get_block_wrapper_attributes();
 
-    return "<figure {$wrapper_attributes}>{$featured_image}</figure>";
+    return "<figure {$wrapper_attributes}>{$banner_image}</figure>";
 }
 
 /**
@@ -64,8 +44,58 @@ function render_block_gen2_banner( $attributes, $content, $block ) {
  * @param int   $post_ID    The currenty post.
  * @return string Returns the image for this page.
  */
-function get_post_image( $post_ID ) {
+function get_block_gen2_banner_post_image( $post_ID ) {
+    $page_categories = array(
+        'About' => 'https://res.cloudinary.com/icecube/images/f_auto,q_auto/v1669753817/IceCube-Gen2/IceCube-Gen2_Web-Headers_5_About_A_2250x500/IceCube-Gen2_Web-Headers_5_About_A_2250x500.jpg',
+        'Facility' => 'https://res.cloudinary.com/icecube/images/f_auto,q_auto/v1669836353/IceCube-Gen2/IceCube-Gen2_Web-Headers_4_Facility_A_2250x500-copy/IceCube-Gen2_Web-Headers_4_Facility_A_2250x500-copy.png',
+        'Science' => 'https://res.cloudinary.com/icecube/images/f_auto,q_auto/v1669754392/IceCube-Gen2/IceCube-Gen2_Web-Headers_5_Science_2250x500_Science_2250x500/IceCube-Gen2_Web-Headers_5_Science_2250x500_Science_2250x500.jpg',
+        'Collaboration' => 'https://res.cloudinary.com/icecube/images/f_auto,q_auto/v1669750829/IceCube-Gen2/IceCube-Gen2_Web-Headers_4_Collaboration_A_2250x500/IceCube-Gen2_Web-Headers_4_Collaboration_A_2250x500.jpg',
+    );
 
+    $image = '';
+    $attrs = array(
+        'class' => 'wp-post-image',
+        'width' => '2250',
+        'height' => '500',
+    );
+
+    $nav_items_raw = wp_get_nav_menu_items('Main');
+    $nav_items = array();
+    foreach( $nav_items_raw as $item ) {
+        $nav_items[$item->object_id] = $item;
+    }
+    echo "<!-- nav items ";
+    print_r( $nav_items );
+    echo " -->";
+
+    if ( array_key_exists( $post_ID, $nav_items ) ) {
+        $parent_ID = $nav_items[$post_ID]->menu_item_parent;
+        if ( $parent_ID != 0 && $nav_items[$parent_ID]->menu_item_parent != 0 ) {
+            $parent_ID = $nav_items[$parent_ID]->menu_item_parent;
+        } elseif ( $parent_ID == 0 ) {
+            $parent_ID = $post_ID;
+        }
+
+        $parent_title = $nav_items[$parent_ID]->title;
+        echo "<!-- parent_title: {$parent_title} -->";
+        if ( array_key_exists( $parent_title, $page_categories ) ) {
+            $image = $page_categories[$parent_title];
+            $attrs['class'] .= ' ' . sanitize_key( $parent_title );
+        }
+    }
+
+    if ( ! $image ) {
+        return '';
+    }
+
+    $normalized_attributes = array();
+    foreach ( $attrs as $key => $value ) {
+        $normalized_attributes[] = $key . '="' . esc_attr( $value ) . '"';
+    }
+    $attr_str = implode( ' ', $normalized_attributes );
+
+    $image_html = "<img {$attr_str} src='{$image}' />";
+    return $image_html;
 }
 
 
@@ -125,7 +155,11 @@ function get_block_gen2_banner_border_attributes( $attributes ) {
  * Registers the `gen2/banner` block on the server.
  */
 function register_block_gen2_banner() {
-    register_block_type_from_metadata(
+    if ( ! function_exists( 'register_block_type' ) ) {
+        // Block editor is not available.
+        return;
+    }
+    $ret = register_block_type(
         plugin_dir_path( __FILE__ ),
         array(
             'render_callback' => 'render_block_gen2_banner',

@@ -1,0 +1,50 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-wordpress-gen2-plugin-banner {
+    margin-left: 0;
+    margin-right: 0;
+    position: relative;
+}
+
+.wp-block-wordpress-gen2-plugin-banner a {
+    display: block;
+}
+
+.wp-block-wordpress-gen2-plugin-banner img {
+    object-fit: cover;
+    width: 100%;
+    height: 500px;
+}
+
+.wp-block-wordpress-gen2-plugin-banner img.science {
+    object-position: 66% center;
+}
+
+@media screen and (min-width: 751px) and (max-width: 1000px) {
+
+    .wp-block-wordpress-gen2-plugin-banner img {
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+
+    .wp-block-wordpress-gen2-plugin-banner img {
+        height: 300px;
+    }
+}
+
+.wp-block-wordpress-gen2-plugin-banner figcaption {
+    background: #000;
+    color: #fff;
+    font-size: 90%;
+    padding: .1rem 1rem .1rem .75rem;
+    top: 25rem;
+    position: absolute;
+    left: 0;
+}
