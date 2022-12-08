@@ -25,7 +25,7 @@ function render_block_gen2_banner( $attributes, $content, $block ) {
     }
     if ( ! $banner_image ) {
         return '';
-    }    
+    }
 
     $wrapper_attributes = get_block_wrapper_attributes();
 
@@ -53,23 +53,23 @@ function get_block_gen2_banner_post_image( $post_ID ) {
         'height' => '500',
     );
 
-    $nav_items_raw = wp_get_nav_menu_items('Main');
+    $nav_items_raw = wp_get_nav_menu_items( 'Main' );
     $nav_items = array();
-    foreach( $nav_items_raw as $item ) {
-        $nav_items[$item->object_id] = $item;
+    foreach ( $nav_items_raw as $item ) {
+        $nav_items[ $item->object_id ] = $item;
     }
 
     if ( array_key_exists( $post_ID, $nav_items ) ) {
-        $parent_ID = $nav_items[$post_ID]->menu_item_parent;
-        if ( $parent_ID != 0 && $nav_items[$parent_ID]->menu_item_parent != 0 ) {
-            $parent_ID = $nav_items[$parent_ID]->menu_item_parent;
-        } elseif ( $parent_ID == 0 ) {
-            $parent_ID = $post_ID;
+        $parent_id = $nav_items[ $post_ID ]->menu_item_parent;
+        if ( $parent_id != 0 && $nav_items[ $parent_id ]->menu_item_parent != 0 ) {
+            $parent_id = $nav_items[ $parent_id ]->menu_item_parent;
+        } elseif ( $parent_id == 0 ) {
+            $parent_id = $post_ID;
         }
 
-        $parent_title = $nav_items[$parent_ID]->title;
+        $parent_title = $nav_items[ $parent_id ]->title;
         if ( array_key_exists( $parent_title, $page_categories ) ) {
-            $image = $page_categories[$parent_title];
+            $image = $page_categories[ $parent_title ];
             $attrs['class'] .= ' ' . sanitize_key( $parent_title );
         }
     }
