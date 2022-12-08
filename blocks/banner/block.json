@@ -1,0 +1,39 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "gen2/banner",
+	"title": "Gen2 Banner",
+	"category": "theme",
+	"description": "Display a banner image on a page.",
+	"textdomain": "default",
+	"attributes": {
+		"isLink": {
+			"type": "boolean",
+			"default": false
+		},
+		"rel": {
+			"type": "string",
+			"attribute": "rel",
+			"default": ""
+		},
+		"linkTarget": {
+			"type": "string",
+			"default": "_self"
+		}
+	},
+	"usesContext": [ "postId", "postType", "queryId" ],
+	"supports": {
+		"align": [ "full" ],
+		"color": {
+			"text": false,
+			"background": false
+		},
+		"html": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorStyle": "editor",
+	"style": "style"
+}

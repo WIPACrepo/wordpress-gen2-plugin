@@ -9,5 +9,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
+$dirpath = plugin_dir_path( __FILE__ );
+
 require plugin_dir_path( __FILE__ ) . 'blocks/index.php';
 require plugin_dir_path( __FILE__ ) . 'includes/index.php';
