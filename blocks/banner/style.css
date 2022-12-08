@@ -30,11 +30,11 @@
 }
 
 .wp-block-gen2-banner figcaption {
-  background: black;
-  color: white;
-  font-size: 90%;
-  padding: .1rem 1rem .1rem .75rem;
-  top: 25rem;
-  position: absolute;
-  left: 0;
+    background: #000000;
+    color: #ffffff;
+    font-size: 90%;
+    padding: .1rem 1rem .1rem .75rem;
+    top: 25rem;
+    position: absolute;
+    left: 0;
 }
