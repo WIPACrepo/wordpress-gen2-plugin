@@ -32,7 +32,10 @@ import './editor.scss';
 export default function Edit() {
 	return (
 		<p { ...useBlockProps() }>
-			{ __( 'Banner – Displays category banner in full width.', 'banner' ) }
+			{ __(
+				'Banner – Displays category banner in full width.',
+				'banner'
+			) }
 		</p>
 	);
 }
