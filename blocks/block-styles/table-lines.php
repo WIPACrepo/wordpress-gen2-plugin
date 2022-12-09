@@ -9,7 +9,8 @@ if ( function_exists( 'register_block_style' ) ) {
          */
         $dirpath = plugin_dir_url( __FILE__ );
         $uri = $dirpath . 'table-lines.css';
-        wp_register_style(
+        //wp_register_style
+        wp_enqueue_style(
             'block-styles-table-lines-stylesheet',
             $uri,
             array(),
