@@ -43,7 +43,7 @@ function get_block_gen2_banner_post_image( $post_ID ) {
         'About' => 'https://res.cloudinary.com/icecube/images/f_auto,q_auto/v1669753817/IceCube-Gen2/IceCube-Gen2_Web-Headers_5_About_A_2250x500/IceCube-Gen2_Web-Headers_5_About_A_2250x500.jpg',
         'Facility' => 'https://res.cloudinary.com/icecube/images/f_auto,q_auto/v1669836353/IceCube-Gen2/IceCube-Gen2_Web-Headers_4_Facility_A_2250x500-copy/IceCube-Gen2_Web-Headers_4_Facility_A_2250x500-copy.png',
         'Science' => 'https://res.cloudinary.com/icecube/images/f_auto,q_auto/v1669754392/IceCube-Gen2/IceCube-Gen2_Web-Headers_5_Science_2250x500_Science_2250x500/IceCube-Gen2_Web-Headers_5_Science_2250x500_Science_2250x500.jpg',
-        'Collaboration' => 'https://res.cloudinary.com/icecube/images/f_auto,q_auto/v1685040191/IceCube-Gen2/Collaboration_Photo-3/Collaboration_Photo-3.jpg',
+        'Collaboration' => 'https://res.cloudinary.com/icecube/images/f_auto,q_auto/v1685041310/IceCube-Gen2/IceCube-Gen2_Web-Headers_3_Collaboration_B_2250x500/IceCube-Gen2_Web-Headers_3_Collaboration_B_2250x500.jpg',
         // 'Collaboration' => 'https://res.cloudinary.com/icecube/images/f_auto,q_auto/v1669750829/IceCube-Gen2/IceCube-Gen2_Web-Headers_4_Collaboration_A_2250x500/IceCube-Gen2_Web-Headers_4_Collaboration_A_2250x500.jpg',
     );
 
